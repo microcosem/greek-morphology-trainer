@@ -79,7 +79,7 @@ function next(){
  const qs=[...on.q].filter(q=>pick(q)!==null);
  if(!qs.length){$("q").textContent="No cards match these filters. Turn on more tenses or question types.";$("word").textContent="";return}
  const q=qs[Math.floor(Math.random()*qs.length)],i=pick(q);cur={q,i,c:DATA.cells[i]};answered=false;
- const prompts={tense:"What is the tense of this word?",marker:"What indicates that this word is imperfect?",pn:"In this word, what is the person and number?",trans:"What is the English translation of this word?",full:"Translate this form into English, including tense and person."};
+ const prompts={tense:"What is the tense of this word?",marker:"What indicates that this word is imperfect?",pn:"In this word, what is the person and number?",trans:"What is the English translation of this word? Include the pronoun for the person.",full:"Translate this form into English, including tense and person."};
  $("q").textContent=prompts[q];$("word").textContent=cur.c.f;$("ans").value="";$("ans").disabled=false;$("res").innerHTML="";
  ["next","override"].forEach(x=>$(x).classList.add("hide"));$("check").classList.remove("hide");$("ans").focus();upd()}
 function upd(){$("score").textContent=score.ok+" / "+score.n+" correct";$("streak").textContent=score.streak>1?"Streak: "+score.streak:""}
@@ -105,9 +105,16 @@ function grade(){
   const an=nrm(a);ok=[...norms].some(n=>an===n||(n.length>=14&&lev(an,n)<=1));
   correct=c.tr+(c.al&&c.al.length?" (also: "+c.al.join("; ")+")":"");note=TENSES[c.t]+", "+PNL(c.p,c.n)+" of "+v.lemma}
  else{
-  const gl=glosses(v.gloss||"");correct=v.gloss||"(no translation in your CSV)";
-  const parts=a.split(/,|;|\bor\b/).map(x=>stripPron(norm(x))).filter(Boolean);
-  ok=parts.some(p=>gl.some(g=>p===g||(g.length>4&&lev(p,g)<=1)));note="Lemma: "+v.lemma}
+  const PR=/^(i|you|he\/she\/it|he\/she|he|she|it|we|they)\s+/;
+  const nr=s=>s.toLowerCase().replace(/\(.*?\)/g," ").replace(/[^a-z\/\s]/g," ").replace(/\s+/g," ").trim();
+  const need={"1s":["i"],"2s":["you"],"2p":["you"],"3s":["he/she/it","he/she","he","she","it"],"1p":["we"],"3p":["they"]}[c.p+c.n];
+  const an=nr(a),m=an.match(PR),pro=m?m[1]:"",rest=m?an.slice(m[0].length):an;
+  const rem=new Set(glosses(v.gloss||""));
+  DATA.cells.forEach(x=>{if(x.v===c.v)[x.tr,...(x.al||[])].forEach(s=>rem.add(nr(s).replace(PR,"")))});
+  const verbOk=!!rest&&[...rem].some(g=>rest===g||(g.length>=6&&lev(rest,g)<=1));
+  const perOk=need.includes(pro);ok=verbOk&&perOk;
+  correct=c.tr;
+  note=(verbOk&&!perOk?"Right meaning, but the person is off (or missing): this form is "+PNL(c.p,c.n)+". ":"")+"Lemma: "+v.lemma+(v.gloss?" (“"+v.gloss+"”)":"")+". Tense is not checked on this question."}
  return{ok,correct,note}}
 function check(){
  if(answered)return;if(!$("ans").value.trim())return;answered=true;
