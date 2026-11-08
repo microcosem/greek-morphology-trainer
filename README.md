@@ -1,35 +1,13 @@
-# Greek Verb Morphology Trainer
+# Greek Morphology Trainer 🏛️
 
-A flashcard-style study page for Greek verb forms. Type your answers; missed cards come back more often.
+This Greek morphology trainer was created for an Elementary Greek module at Trinity College Dublin. It was created for personal study for those at the beginners level studying ancient Greek.
 
-## Where the data comes from
+## Scope and assumptions
 
-`wordlist.csv` is the single source of truth. Edit it, commit, and the site updates itself.
+- The project currently includes over 50 **verbs** (no nouns or other vocab).
+- This version specifically focuses on present, future, imperfect, 1st aorist, and 2nd aorist (including some "root" aorist words).
 
-- One **column per verb**; labels are in column A.
-- Each tense has a heading row followed by six person/number rows. Use `No ...` or `Not ...` for forms that don't exist.
-- The **Translation** row holds the dictionary meaning.
-- The **English** rows (base, 3rd person singular, past, -ing) are used to generate full translations such as "We were pursuing". `English aorist (optional)` is only for aorists that are not a plain past, such as `was/were stopped`.
-- Rows are found by their labels, so you can reorder rows or add verbs (columns) freely.
+## About the files
 
-## How it publishes
-
-On every push to `main`, the GitHub Action in `.github/workflows/deploy.yml` runs `build_data.py`, which checks the CSV and generates `data.js`, then deploys to GitHub Pages. If the CSV has an error, the build fails and the live site is left as it was. `data.js` is not committed.
-
-One-time setup: **Settings -> Pages -> Source: GitHub Actions**.
-
-## Running locally
-
-```
-python3 build_data.py          # creates data.js and reports problems
-python3 -m http.server         # then open http://localhost:8000
-```
-
-## Files
-
-| File | Purpose |
-|------|---------|
-| `wordlist.csv` | The data (edit this) |
-| `build_data.py` | Validates the CSV and generates `data.js` |
-| `index.html`, `styles.css`, `app.js` | The site |
-| `.github/workflows/deploy.yml` | Automatic build and deploy |
+- [`greek-morphology-source`](./greek-verb-wordlist.csv) - Contains the list of verbs and all of their related morphologies.
+- [`greek-morphology-source.html`](./greek-morphology-source.html) - Source code of the study webpage. Build with help from Claude.
