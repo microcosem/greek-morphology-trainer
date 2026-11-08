@@ -13,4 +13,4 @@ This Greek morphology trainer was created for an Elementary Greek module at Trin
 ## About the files
 
 - [`index.html`](./greek-morphology-source.html) - Source code of the study (index.html) webpage. Build with help from Claude.
-- [`greek-morphology-source`](./greek-verb-wordlist.csv) - Contains the list of verbs and all of their related morphologies.
+- [`greek-morphology-source.csv`](./greek-verb-wordlist.csv) - Contains the list of verbs and all of their related morphologies.
