@@ -1,0 +1,56 @@
+# Builds data.js from wordlist.csv and publishes the site to GitHub Pages.
+#
+# One-time setup: repo Settings -> Pages -> Source: "GitHub Actions".
+#
+# - Pull requests: only build and validate (nothing is deployed).
+# - Pushes to main: build, validate, then deploy.
+# If wordlist.csv has an error, the build fails and the live site stays as it was.
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:      # lets you run it manually from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build data.js from wordlist.csv
+        run: python3 build_data.py
+
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp index.html styles.css app.js data.js wordlist.csv _site/
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Greek Verb Morphology Trainer: styles
+   Sections: 1. Colour themes  2. Base  3. Layout  4. Components
+   ========================================================================== */
+
+/* ---------- 1. Colour themes ----------
+   Every colour is a variable, so light and dark mode only change values here. */
+:root {
+  --bg: #f6f4ef;
+  --card: #ffffff;
+  --text: #1d1d1b;
+  --muted: #6b6a64;
+  --line: #dcd8cc;
+  --accent: #2f5d8a;
+  --ok: #1f7a45;
+  --ok-bg: #e4f3ea;
+  --bad: #b3322a;
+  --bad-bg: #f9e6e4;
+}
+
+/* Dark mode when the device prefers it... */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17181a;
+    --card: #222427;
+    --text: #ecebe6;
+    --muted: #a09f98;
+    --line: #383b3f;
+    --accent: #7fb0e0;
+    --ok: #6fcf97;
+    --ok-bg: #1d3326;
+    --bad: #f08b83;
+    --bad-bg: #3a2321;
+  }
+}
+
+/* ...or when forced with <html data-theme="dark"> (same values as above). */
+:root[data-theme="dark"] {
+  --bg: #17181a;
+  --card: #222427;
+  --text: #ecebe6;
+  --muted: #a09f98;
+  --line: #383b3f;
+  --accent: #7fb0e0;
+  --ok: #6fcf97;
+  --ok-bg: #1d3326;
+  --bad: #f08b83;
+  --bad-bg: #3a2321;
+}
+
+/* ---------- 2. Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Keep content clear of phone notches and home bars. */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1 {
+  font-size: 1.15rem;
+  margin: 4px 0 12px;
+}
+
+/* ---------- 3. Layout ---------- */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.label {
+  margin: 10px 0 4px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ---------- 4. Components ---------- */
+
+/* Filter chips: "on" means the filter is active. */
+.chip {
+  padding: 4px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.chip.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+/* The flashcard */
+.card {
+  margin-top: 14px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.question {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.greek-word {
+  margin: 8px 0 14px;
+  font-family: "Gentium Plus", "Palatino Linotype", "Times New Roman", serif;
+  font-size: 2.4rem;
+  word-break: break-word;
+}
+
+/* Greek text inside feedback */
+.greek-inline {
+  font-family: "Gentium Plus", "Palatino Linotype", serif;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+/* Buttons: filled by default, outlined with .secondary */
+.btn {
+  padding: 10px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--bg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* Feedback box: green for correct, red for incorrect */
+.feedback {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+
+.feedback.correct {
+  background: var(--ok-bg);
+  border: 1px solid var(--ok);
+}
+
+.feedback.incorrect {
+  background: var(--bad-bg);
+  border: 1px solid var(--bad);
+}
+
+.feedback-title {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.note {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none;
+}
