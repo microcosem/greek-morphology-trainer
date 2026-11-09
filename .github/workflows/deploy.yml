@@ -32,13 +32,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Build data.js from wordlist.csv
+      - name: Build data.js and reference.html from wordlist.csv
         run: python3 build_data.py
 
       - name: Assemble the site
         run: |
           mkdir _site
-          cp index.html styles.css app.js data.js wordlist.csv _site/
+          cp index.html styles.css app.js data.js reference.html wordlist.csv _site/
 
       - uses: actions/upload-pages-artifact@v4
         with:

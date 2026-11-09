@@ -207,7 +207,7 @@ input[type="text"] {
   font-weight: bold;
 }
 
-.note, .note .ul {
+.note {
   margin-top: 6px;
   color: var(--muted);
   font-size: 0.9rem;
@@ -215,4 +215,128 @@ input[type="text"] {
 
 .hidden {
   display: none;
+}
+
+/* ---------- 5. Navigation and study page (reference.html) ---------- */
+
+a {
+  color: var(--accent);
+}
+
+.site-nav {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+/* The study page has wide tables, so it gets a wider column. */
+main.wide {
+  max-width: 960px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.toolbar input[type="search"] {
+  flex: 1 1 260px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+}
+
+/* "Jump to" list of verbs */
+.jump {
+  line-height: 2;
+  font-size: 1.05rem;
+}
+
+.jump a {
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+/* One block per verb */
+.verb {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.verb[hidden] {
+  display: none;
+}
+
+.verb h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.verb-gloss {
+  color: var(--muted);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.verb-english {
+  margin: 2px 0 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Tables scroll sideways on narrow screens instead of squashing. */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+th,
+td {
+  padding: 6px 10px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+thead th {
+  border-top: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+tbody th {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+/* Small English translation under each Greek form (hidden by the checkbox) */
+.gloss {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.hide-english .gloss {
+  display: none;
+}
+
+.none {
+  color: var(--muted);
 }
