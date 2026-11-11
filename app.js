@@ -475,7 +475,7 @@ function buildChips(container, labels, enabledSet) {
 /* ---------- 8. Events and start-up ---------- */
 
 function init() {
-  // data.js is generated from wordlist.csv; explain clearly if it is missing.
+  // data.js is generated from verblist.csv; explain clearly if it is missing.
   if (typeof DATA === "undefined") {
     document.getElementById("question").textContent =
       "data.js not found. Run: python3 build_data.py";
