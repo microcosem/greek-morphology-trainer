@@ -1,6 +1,6 @@
 /* ==========================================================================
    Greek Noun Practice: app logic
-   Depends on nouns_data.js, which defines the global NOUN_DATA object:
+   Depends on data_nouns.js, which defines the global NOUN_DATA object:
      NOUN_DATA.nouns = [{ lemma, declension, gender, translation,
                           forms: [{ form, analyses: [{ case, number, articles }] }] }]
    A noun's "forms" are its distinct spellings. When one spelling serves several
@@ -563,10 +563,10 @@ function buildChips(container, labels, enabledSet) {
 /* ---------- 9. Events and start-up ---------- */
 
 function init() {
-  // nouns_data.js is generated from nounlist.csv; explain clearly if it is missing.
+  // data_nouns.js is generated from nounlist.csv; explain clearly if it is missing.
   if (typeof NOUN_DATA === "undefined") {
     document.getElementById("question").textContent =
-      "nouns_data.js not found. Run: python3 build_data.py";
+      "data_nouns.js not found. Run: python3 build_data.py";
     return;
   }
   NOUNS = NOUN_DATA.nouns;

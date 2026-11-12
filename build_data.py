@@ -55,7 +55,7 @@ CSV_FILE = "verblist.csv"
 OUT_FILE = "data_verbs.js"
 VERB_REFERENCE = "verbs.html"
 NOUN_CSV_FILE = "nounlist.csv"
-NOUN_OUT_FILE = "nouns_data.js"
+NOUN_OUT_FILE = "data_nouns.js"
 
 # Tense heading (matched by prefix, case-insensitive) -> key used by the app.
 TENSE_HEADINGS = [
@@ -266,7 +266,7 @@ def write_reference_page(verbs, cells, verb_english):
 
 
 # ---------------------------------------------------------------------------
-# Nouns (nouns_data.js)
+# Nouns (data_nouns.js)
 # ---------------------------------------------------------------------------
 
 CASES = ["nominative", "genitive", "dative", "accusative", "vocative"]
