@@ -24,8 +24,8 @@ and verbs (columns) can be added freely. Mistakes are reported as errors (the
 script stops and nothing is written) or warnings (the build continues).
 
 Outputs:
-  `data_nouns.js`        the nouns data used by the trainer (nouns.html)
-  `data_verbs.js`        the verbs data used by the noun practice page (verbs.html)
+  `data_nouns.js`        the nouns data used by the nouns practice page (nouns.html)
+  `data_verbs.js`        the verbs data used by the verbs practice page (verbs.html)
   `verb-tables.html`     the "Study page": every verb's forms in tables, with translations
 
 `nounlist.csv` layout (one block per noun, blocks separated by a blank row):

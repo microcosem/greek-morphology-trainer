@@ -38,7 +38,7 @@ jobs:
       - name: Assemble the site
         run: |
           mkdir _site
-          cp index.html styles.css verbs.js nouns.js data_verbs.js data_nouns.js verbs.html nouns.html verblist.csv _site/
+          cp index.html verbs.html nouns.html verb-tables.html styles.css verbs.js nouns.js data_verbs.js data_nouns.js verblist.csv _site/
 
       - uses: actions/upload-pages-artifact@v4
         with:
