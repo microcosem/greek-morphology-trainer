@@ -32,13 +32,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Build data_verbs.js and reference.html from verblist.csv
+      - name: Build data_verbs.js and verbs.html from verblist.csv
         run: python3 build_data.py
 
       - name: Assemble the site
         run: |
           mkdir _site
-          cp index.html styles.css app.js data_verbs.js reference.html verblist.csv _site/
+          cp index.html styles.css app.js data_verbs.js verbs.html verblist.csv _site/
 
       - uses: actions/upload-pages-artifact@v4
         with:
