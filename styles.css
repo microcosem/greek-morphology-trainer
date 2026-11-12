@@ -340,3 +340,145 @@ tbody th {
 .none {
   color: var(--muted);
 }
+
+/* ---------- 6. Reset button (verbs.html and nouns.html) ---------- */
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+/* Destructive action: outlined in the "bad" colour instead of the accent. */
+.btn.danger {
+  border-color: var(--bad);
+  background: transparent;
+  color: var(--bad);
+}
+
+.reset-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.reset-row .note {
+  margin: 0;
+}
+
+/* ---------- 7. Landing page (index.html) ---------- */
+
+main.landing {
+  max-width: 720px;
+  padding-top: 32px;
+}
+
+.hero {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.hero-greek {
+  color: var(--accent);
+  font-size: 2.6rem;
+  line-height: 1.1;
+}
+
+.hero h1 {
+  margin: 6px 0 8px;
+  font-size: 1.6rem;
+}
+
+.lead {
+  max-width: 34em;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.section-title {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Two cards side by side, stacking on narrow screens. */
+.lesson-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.lesson-select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.lesson-select:hover,
+.lesson-select:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.lesson-select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lesson-greek {
+  color: var(--accent);
+  font-size: 2.2rem;
+  line-height: 1.1;
+}
+
+.lesson-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.lesson-desc {
+  flex: 1;                     /* pushes the "Start" line to the bottom of the card */
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.lesson-cta {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.landing-links,
+.landing-foot {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.landing-foot {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-select {
+    transition: none;
+  }
+
+  .lesson-select:hover,
+  .lesson-select:focus-visible {
+    transform: none;
+  }
+}

@@ -3,61 +3,64 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Greek Verb Morphology Trainer</title>
+  <title>Elementary Greek Study Helper</title>
 
   <!-- Gentium Plus gives clean polytonic Greek; styles.css has fallback fonts. -->
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main>
-    <h1>Greek Verb Morphology Trainer</h1>
-    <nav class="site-nav"><a href="reference.html">Study page</a> &middot; <a href="nouns.html">Noun practice</a></nav>
+  <main class="landing">
+    <header class="hero">
+      <div class="hero-greek greek-inline" lang="grc">Ἑλληνικά</div>
+      <h1>Elementary Greek Study Helper</h1>
+      <p class="lead">
+        Flashcard-style practice for beginning ancient Greek. Type your answers,
+        get instant feedback, and the cards you miss come back more often.
+      </p>
+    </header>
 
-    <!-- Running score and streak -->
-    <div class="bar">
-      <span id="score">0 / 0 correct</span>
-      <span id="streak"></span>
+    <h2 class="section-title">What would you like to study?</h2>
+    <div class="lesson-nav">
+      <a class="lesson-select" href="verbs.html">
+        <span class="lesson-greek greek-inline" lang="grc">ῥῆμα</span>
+        <span class="lesson-title">Verbs</span>
+        <span class="lesson-desc">
+          Tense, person and number, and translation, across the present,
+          future, imperfect and aorist.
+        </span>
+      </a>
+
+      <a class="lesson-select" href="nouns.html">
+        <span class="lesson-greek greek-inline" lang="grc">ὄνομα</span>
+        <span class="lesson-title">Nouns</span>
+        <span class="lesson-desc">
+          Declension, case and number, and matching each noun with its
+          article (and each article with a noun).
+        </span>
+      </a>
+
+      <a class="lesson-select" href="reference.html">
+        <span class="lesson-desc">Study verb tables</span>
+      </a>
+
+      <a class="lesson-select" href="">
+        <span class="lesson-desc">Study noun tables</span>
+      </a>
     </div>
 
-    <!-- Filters (chips are created by app.js) -->
-    <div class="label">Question types</div>
-    <div class="chips" id="question-chips"></div>
-    <div class="label">Tenses</div>
-    <div class="chips" id="tense-chips"></div>
-
-    <!-- The flashcard -->
-    <div class="card">
-      <div class="question" id="question"></div>
-      <div class="greek-word" id="word"></div>
-
-      <input type="text" id="answer" placeholder="Type your answer"
-             autocomplete="off" autocapitalize="off" spellcheck="false">
-
-      <div class="button-row">
-        <button class="btn" id="check-btn">Check</button>
-        <button class="btn secondary hidden" id="override-btn">Mark as correct</button>
-        <button class="btn hidden" id="next-btn">Next</button>
-      </div>
-
-      <!-- Feedback is inserted here after each answer -->
-      <div id="result"></div>
-    </div>
-
-    <p class="note">Missed cards come back more often. Press 'Enter' once to check, and twice to continue.</p>
-    <div class="note">Accepted pronouns:
+    <p class="landing-links">
+      Want to review tables, instead?
       <ul>
-        <li><span style="font-weight:bold;">1st singular:</span> I</li>
-        <li><span style="font-weight:bold;">2nd singular and plural:</span> you</li>
-        <li><span style="font-weight:bold;">3rd singular:</span> he, she, it, he/she or he/she/it</li>
-        <li><span style="font-weight:bold;">1st plural:</span> we</li>
-        <li><span style="font-weight:bold;">3rd plural:</span> they</li>
+        <li><a href="reference.html">Verb tables</a></li>
+        <li><a href="">Noun tables</a></li>
       </ul>
-    </div>
-  </main>
+    </p>
 
-  <!-- data.js must load before app.js (it defines DATA). "defer" keeps the order. -->
-  <script src="data.js" defer></script>
-  <script src="app.js" defer></script>
+    <p class="landing-foot">
+      Your progress is saved in <strong>this browser only</strong>.
+      <br/>Each practice page has a <strong>Reset progress</strong> button at the bottom.
+    </p>
+  </main>
 </body>
 </html>
