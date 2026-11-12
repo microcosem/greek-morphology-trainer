@@ -24,9 +24,9 @@ and verbs (columns) can be added freely. Mistakes are reported as errors (the
 script stops and nothing is written) or warnings (the build continues).
 
 Outputs:
-  `data_nouns.js`   the nouns data used by the trainer (nouns.html)
-  `data_verbs.js`   the verbs data used by the noun practice page (verbs.html)
-  `verbs.html`      the "Study page": every verb's forms in tables, with translations
+  `data_nouns.js`        the nouns data used by the trainer (nouns.html)
+  `data_verbs.js`        the verbs data used by the noun practice page (verbs.html)
+  `verb-tables.html`     the "Study page": every verb's forms in tables, with translations
 
 `nounlist.csv` layout (one block per noun, blocks separated by a blank row):
 
@@ -53,7 +53,7 @@ import unicodedata
 
 CSV_FILE = "verblist.csv"
 OUT_FILE = "data_verbs.js"
-VERB_REFERENCE = "verbs.html"
+VERB_REFERENCE = "verb-tables.html"
 NOUN_CSV_FILE = "nounlist.csv"
 NOUN_OUT_FILE = "data_nouns.js"
 
@@ -145,7 +145,7 @@ def english(eng, tense, person, number):
 
 
 # ---------------------------------------------------------------------------
-# Study page (verbs.html)
+# Study page (verb-tables.html)
 # ---------------------------------------------------------------------------
 
 TENSE_TITLES = {
@@ -249,7 +249,7 @@ def verb_section(index, verb, eng, verb_cells):
 
 
 def write_reference_page(verbs, cells, verb_english):
-    """Write verbs.html: one table per verb, built from the same data as data_verbs.js."""
+    """Write verb-tables.html: one table per verb, built from the same data as data_verbs.js."""
     esc = html.escape
     sections, links = [], []
     for index, verb in enumerate(verbs):

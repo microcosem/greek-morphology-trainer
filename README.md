@@ -36,7 +36,7 @@ python3 -m http.server         # then open http://localhost:8000
 |------|---------|
 | `verblist.csv` | The data (edit this) |
 | `build_data.py` | Validates the CSV and generates `data_verbs.js` |
-| `index.html`, `styles.css`, `app.js` | The site |
+| `index.html`, `styles.css`, `verbs.js` | The site |
 | `.github/workflows/deploy.yml` | Automatic build and deploy |
 
 ### `verblist.csv`
@@ -78,5 +78,5 @@ Open `http://localhost:8000` in your browser to view the built site.
 |--------------------------------------|-------------------------------------------|
 | `verblist.csv`                       | The data (edit this file ONLY)            |
 | `build_data.py`                      | Validates the CSV and generates `data_verbs.js` |
-| `index.html`, `styles.css`, `app.js` | Site files                                |
+| `index.html`, `styles.css`, `verbs.js` | Site files                                |
 | `.github/workflows/deploy.yml`       | Automatic build and deploy                |
