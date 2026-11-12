@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Greek Verb Morphology Trainer</title>
+
+  <!-- Gentium Plus gives clean polytonic Greek; styles.css has fallback fonts. -->
+  <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>Greek Verb Morphology Trainer</h1>
+    <nav class="site-nav"><a href="reference.html">Study page</a> &middot; <a href="nouns.html">Noun practice</a></nav>
+
+    <!-- Running score and streak -->
+    <div class="bar">
+      <span id="score">0 / 0 correct</span>
+      <span id="streak"></span>
+    </div>
+
+    <!-- Filters (chips are created by app.js) -->
+    <div class="label">Question types</div>
+    <div class="chips" id="question-chips"></div>
+    <div class="label">Tenses</div>
+    <div class="chips" id="tense-chips"></div>
+
+    <!-- The flashcard -->
+    <div class="card">
+      <div class="question" id="question"></div>
+      <div class="greek-word" id="word"></div>
+
+      <input type="text" id="answer" placeholder="Type your answer"
+             autocomplete="off" autocapitalize="off" spellcheck="false">
+
+      <div class="button-row">
+        <button class="btn" id="check-btn">Check</button>
+        <button class="btn secondary hidden" id="override-btn">Mark as correct</button>
+        <button class="btn hidden" id="next-btn">Next</button>
+      </div>
+
+      <!-- Feedback is inserted here after each answer -->
+      <div id="result"></div>
+    </div>
+
+    <p class="note">Missed cards come back more often. Press 'Enter' once to check, and twice to continue.</p>
+    <div class="note">Accepted pronouns:
+      <ul>
+        <li><span style="font-weight:bold;">1st singular:</span> I</li>
+        <li><span style="font-weight:bold;">2nd singular and plural:</span> you</li>
+        <li><span style="font-weight:bold;">3rd singular:</span> he, she, it, he/she or he/she/it</li>
+        <li><span style="font-weight:bold;">1st plural:</span> we</li>
+        <li><span style="font-weight:bold;">3rd plural:</span> they</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- data_verbs.js must load before app.js (it defines DATA). "defer" keeps the order. -->
+  <script src="data_verbs.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
