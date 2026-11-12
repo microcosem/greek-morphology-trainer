@@ -96,10 +96,33 @@ function saveProgress() {
 
 /* ---------- 4. Text helpers ---------- */
 
-// For comparing Greek: lowercase, remove accents, breathings, macrons and the
-// iota subscript, treat final sigma as sigma, and keep only Greek letters,
-// spaces, commas and slashes.  "ἀγορᾶς" and "αγορας" compare as equal.
+// For comparing Greek answers. Accents, breathings and the iota subscript MUST match;
+// only differences that don't change the word are ignored:
+//   - macrons (ᾱ vs α), which are hard to type
+//   - grave vs acute (τὸν vs τόν), because a final acute turns grave in running text
+//   - final sigma ς vs σ
+//   - capitals, extra spaces, and how the marks were typed (precomposed or combining)
+// So "ἀγορᾶς" matches "ἀγορᾶς" but not "ἀγορας".
 function normalizeGreek(text) {
+  const decomposed = text
+    .normalize("NFD")
+    .toLowerCase()
+    .replace(/[\u0304\u0306]/g, "")                        // macron, breve
+    .replace(/\u0300/g, "\u0301")                           // grave -> acute
+    .replace(/\u03c2/g, "\u03c3")                           // final sigma -> sigma
+    .replace(/[^\u03b1-\u03c9\u0300-\u036f\s,\/]/g, " ");  // keep Greek letters and marks
+
+  // Put each letter's marks in a fixed order so differently typed input compares equal.
+  return decomposed
+    .replace(/([\u03b1-\u03c9])([\u0300-\u036f]+)/g,
+             (match, letter, marks) => letter + [...marks].sort().join(""))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// The old, forgiving comparison that ignores ALL marks. It is used only to
+// notice "right letters, wrong accent" so the feedback can say so.
+function normalizeGreekLoose(text) {
   return text
     .normalize("NFD")
     .toLowerCase()
@@ -254,7 +277,7 @@ function showNextCard() {
   el.question.textContent = QUESTION_PROMPTS[questionType];
   el.word.textContent = wordToShow(questionType, card);
   el.answer.placeholder = GREEK_ANSWER[questionType]
-    ? "Type in Greek (accents optional)"
+    ? "Type in Greek (accents and breathings needed)"
     : "Type your answer";
   el.answer.value = "";
   el.answer.disabled = false;
@@ -359,8 +382,24 @@ function gradeArticle(answer, card) {
   let note = `${form.form} is ${describeAnalyses(slots)} (${GENDER_LABELS[noun.gender] || "gender unknown"}): ${meaningOf(noun, slots)}`;
   if (!ok && !hasGreekLetters(answer)) {
     note += " Type the article in Greek letters.";
+  } else if (!ok) {
+    const looseAccepted = new Set(entries.map(e => normalizeGreekLoose(e.display)));
+    const typedLoose = normalizeGreekLoose(answer).split(/[,\/\s]+/).filter(Boolean);
+    if (typedLoose.length > 0 && typedLoose.every(piece => looseAccepted.has(piece))) {
+      note += " The letters are right, but accents and breathing marks are required.";
+    }
   }
   return { ok, correct, note };
+}
+
+// True if the answer is a form of a noun that takes this article when marks are ignored.
+function looseMatchExists(answer, entry) {
+  let words = normalizeGreekLoose(answer).split(/\s+/).filter(Boolean);
+  const looseArticles = new Set([...articleEntries.values()].map(e => normalizeGreekLoose(e.display)));
+  if (words.length > 1 && looseArticles.has(words[0])) words = words.slice(1);
+  const typed = words.join(" ");
+  return typed !== "" && [...entry.nounIndexes].some(n =>
+    NOUNS[n].forms.some(f => normalizeGreekLoose(f.form) === typed));
 }
 
 function gradeNounForArticle(answer, card) {
@@ -399,6 +438,8 @@ function gradeNounForArticle(answer, card) {
     note += ` ${matchedNoun.lemma} takes this article, but the form that goes with it is ${unique(exact).join(" / ")}.`;
   } else if (!ok && !hasGreekLetters(answer)) {
     note += " Type the noun in Greek letters.";
+  } else if (!ok && looseMatchExists(answer, entry)) {
+    note += " The letters are right, but accents and breathing marks are required.";
   } else if (!ok) {
     const other = NOUNS.find(noun => noun.forms.some(f => normalizeGreek(f.form) === typed));
     if (other) note += ` ${other.lemma} (${GENDER_LABELS[other.gender] || "gender unknown"}) does not go with this article.`;
