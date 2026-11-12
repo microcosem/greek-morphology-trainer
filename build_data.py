@@ -26,7 +26,7 @@ script stops and nothing is written) or warnings (the build continues).
 Outputs:
   `data_nouns.js`   the nouns data used by the trainer (nouns.html)
   `data_verbs.js`   the verbs data used by the noun practice page (verbs.html)
-  `reference.html`  the "Study page": every verb's forms in tables, with translations
+  `verbs.html`      the "Study page": every verb's forms in tables, with translations
 
 `nounlist.csv` layout (one block per noun, blocks separated by a blank row):
 
@@ -53,7 +53,7 @@ import unicodedata
 
 CSV_FILE = "verblist.csv"
 OUT_FILE = "data_verbs.js"
-REFERENCE_FILE = "reference.html"
+VERB_REFERENCE = "verbs.html"
 NOUN_CSV_FILE = "nounlist.csv"
 NOUN_OUT_FILE = "nouns_data.js"
 
@@ -145,7 +145,7 @@ def english(eng, tense, person, number):
 
 
 # ---------------------------------------------------------------------------
-# Study page (reference.html)
+# Study page (verbs.html)
 # ---------------------------------------------------------------------------
 
 TENSE_TITLES = {
@@ -249,7 +249,7 @@ def verb_section(index, verb, eng, verb_cells):
 
 
 def write_reference_page(verbs, cells, verb_english):
-    """Write reference.html: one table per verb, built from the same data as data_verbs.js."""
+    """Write verbs.html: one table per verb, built from the same data as data_verbs.js."""
     esc = html.escape
     sections, links = [], []
     for index, verb in enumerate(verbs):
@@ -261,7 +261,7 @@ def write_reference_page(verbs, cells, verb_english):
             .replace("__JUMP_LINKS__", " ".join(links))
             .replace("__SECTIONS__", "\n\n    ".join(sections))
             .replace("__COUNT__", str(len(verbs))))
-    with open(REFERENCE_FILE, "w", encoding="utf-8") as out:
+    with open(VERB_REFERENCE, "w", encoding="utf-8") as out:
         out.write(page)
 
 
@@ -499,7 +499,7 @@ def main():
         out.write("\n  ]\n};\n")
 
     print(f"Wrote {OUT_FILE}: {len(verbs)} verbs, {len(cells)} forms.")
-    print(f"Wrote {REFERENCE_FILE}")
+    print(f"Wrote {VERB_REFERENCE}")
     print(f"Wrote {NOUN_OUT_FILE}: {len(nouns)} nouns.")
     print(f"{len(warnings)} warning(s).")
 
