@@ -1,6 +1,6 @@
 /* ==========================================================================
    Greek Verb Morphology Trainer: app logic
-   Depends on data.js, which defines the global DATA object:
+   Depends on data_verbs.js, which defines the global DATA object:
      DATA.verbs  = [{ lemma, gloss }, ...]
      DATA.cells  = [{ verb, tense, person, number, form,
                       translation, alternatives }, ...]
@@ -475,10 +475,10 @@ function buildChips(container, labels, enabledSet) {
 /* ---------- 8. Events and start-up ---------- */
 
 function init() {
-  // data.js is generated from verblist.csv; explain clearly if it is missing.
+  // data_verbs.js is generated from verblist.csv; explain clearly if it is missing.
   if (typeof DATA === "undefined") {
     document.getElementById("question").textContent =
-      "data.js not found. Run: python3 build_data.py";
+      "data_verbs.js not found. Run: python3 build_data.py";
     return;
   }
 
