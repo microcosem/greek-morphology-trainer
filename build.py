@@ -24,11 +24,11 @@ and verbs (columns) can be added freely. Mistakes are reported as errors (the
 script stops and nothing is written) or warnings (the build continues).
 
 Outputs:
-  data.js         the verb data used by the trainer (index.html)
-  reference.html  the "Study page": every verb's forms in tables, with translations
-  nouns_data.js   the noun data used by the noun practice page (nouns.html)
+  `data_nouns.js`   the nouns data used by the trainer (nouns.html)
+  `data_verbs.js`   the verbs data used by the noun practice page (verbs.html)
+  `reference.html`  the "Study page": every verb's forms in tables, with translations
 
-nounlist.csv layout (one block per noun, blocks separated by a blank row):
+`nounlist.csv` layout (one block per noun, blocks separated by a blank row):
 
   1st declension | Singular | Plural | Article (singular) | Article (plural)
   Nominative     | ...
@@ -52,7 +52,7 @@ import sys
 import unicodedata
 
 CSV_FILE = "verblist.csv"
-OUT_FILE = "data.js"
+OUT_FILE = "data_verbs.js"
 REFERENCE_FILE = "reference.html"
 NOUN_CSV_FILE = "nounlist.csv"
 NOUN_OUT_FILE = "nouns_data.js"
@@ -249,7 +249,7 @@ def verb_section(index, verb, eng, verb_cells):
 
 
 def write_reference_page(verbs, cells, verb_english):
-    """Write reference.html: one table per verb, built from the same data as data.js."""
+    """Write reference.html: one table per verb, built from the same data as data_verbs.js."""
     esc = html.escape
     sections, links = [], []
     for index, verb in enumerate(verbs):
