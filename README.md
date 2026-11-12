@@ -19,14 +19,14 @@ The site is built using GitHub Pages.
 
 ## How it publishes
 
-On every push to `main`, the GitHub Action in `.github/workflows/deploy.yml` runs `build_data.py`, which checks the CSV and generates `data.js`, then deploys to GitHub Pages. If the CSV has an error, the build fails and the live site is left as it was. `data.js` is not committed.
+On every push to `main`, the GitHub Action in `.github/workflows/deploy.yml` runs `build_data.py`, which checks the CSV and generates `data_verbs.js`, then deploys to GitHub Pages. If the CSV has an error, the build fails and the live site is left as it was. `data_verbs.js` is not committed.
 
 One-time setup: **Settings -> Pages -> Source: GitHub Actions**.
 
 ## Running locally
 
 ```
-python3 build_data.py          # creates data.js and reports problems
+python3 build_data.py          # creates data_verbs.js and reports problems
 python3 -m http.server         # then open http://localhost:8000
 ```
 
@@ -35,7 +35,7 @@ python3 -m http.server         # then open http://localhost:8000
 | File | Purpose |
 |------|---------|
 | `verblist.csv` | The data (edit this) |
-| `build_data.py` | Validates the CSV and generates `data.js` |
+| `build_data.py` | Validates the CSV and generates `data_verbs.js` |
 | `index.html`, `styles.css`, `app.js` | The site |
 | `.github/workflows/deploy.yml` | Automatic build and deploy |
 
@@ -54,14 +54,14 @@ python3 -m http.server         # then open http://localhost:8000
 
 ## Publishing flow
  
-On every push to `main`, the GitHub Action in `.github/workflows/deploy.yml` runs `build_data.py`, which checks the CSV to generate `data.js`. It then deploys to GitHub Pages. If the CSV has an error, the build fails, and the live site is left as it was. **`data.js` is not committed.**
+On every push to `main`, the GitHub Action in `.github/workflows/deploy.yml` runs `build_data.py`, which checks the CSV to generate `data_verbs.js`. It then deploys to GitHub Pages. If the CSV has an error, the build fails, and the live site is left as it was. **`data_verbs.js` is not committed.**
  
 ## Running locally
 
 To run locally, first run the `build_data.py` script: 
  
 ```
-python3 build_data.py          # creates `data.js` and reports problems
+python3 build_data.py          # creates `data_verbs.js` and reports problems
 ```
 
 Then, launch an HTTP server locally:
@@ -77,6 +77,6 @@ Open `http://localhost:8000` in your browser to view the built site.
 | File                                 | Purpose                                   |
 |--------------------------------------|-------------------------------------------|
 | `verblist.csv`                       | The data (edit this file ONLY)            |
-| `build_data.py`                      | Validates the CSV and generates `data.js` |
+| `build_data.py`                      | Validates the CSV and generates `data_verbs.js` |
 | `index.html`, `styles.css`, `app.js` | Site files                                |
 | `.github/workflows/deploy.yml`       | Automatic build and deploy                |
